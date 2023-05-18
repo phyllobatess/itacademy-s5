@@ -7,10 +7,13 @@ export default function fetchChiste() {
         },
     })
         .then((response) => {
-        console.log(response);
+        //console.log(response);
         return response.json();
     })
         .then((response) => {
         console.log(response);
     });
 }
+
+const button = document.getElementById("siguienteChiste");
+button.addEventListener("click", fetchChiste);

@@ -14,7 +14,7 @@ export default function fetchChiste(): void {
     },
   })
     .then((response) => {
-      console.log(response);
+      //console.log(response);
       return response.json();
     })
 
