@@ -13,16 +13,21 @@
     />
     <link rel="stylesheet" href="public/js/style.css">
   </head>
-  <body>
+  <body >
     <main class="d-flex justify-content-center pt-4">
+      <div id="ciudad" class="m-4">
+        <h1 id="botonClima"></h1>
+      </div>  
+      <div id="temperatura"></div>
       <div class="card " style="width: 18rem">
+        <h2 class="text-center">¿Nos reímos un poco?</h2>
         <img src="https://t2.uc.ltmcdn.com/es/posts/3/6/2/tipos_de_risa_y_su_significado_52263_orig.jpg" class="card-img-top" alt="..." />
         <div class="card-body">
           <h2 id="chiste" class="card-title d-flex justify-content-center"></h2>
           <p id="botones" class="card-text ocultar d-flex justify-content-center " >
-            <button id="uno"  type="button" class="btn btn-danger m-2 ">1</button>
-            <button id="dos" type="button" class="btn btn-warning m-2 ">2</button>
-            <button id="tres"  type="button" class="btn btn-success m-2 ">3</button>
+            <button id="uno"  type="button" class="btn btn-danger m-2 ocultar ">1</button>
+            <button id="dos" type="button" class="btn btn-warning m-2 ocultar">2</button>
+            <button id="tres"  type="button" class="btn btn-success m-2 ocultar ">3</button>
           </p>
           <a href="#" id="siguienteChiste"  class="btn btn-primary d-flex justify-content-center">Siguiente Chiste!</a>
         </div>

@@ -13,7 +13,9 @@ const header = {
         Accept: "application/json",
     },
 };
-//Funcion que carga Dad JOke con método fetch:
+const reportAcudits = [];
+const reportAcuditsClean = [];
+//Funcion que carga Dad Joke con método fetch:
 export default function fetchChiste() {
     const urlChiste = "https://icanhazdadjoke.com/";
     fetch(urlChiste, {
@@ -32,13 +34,41 @@ export default function fetchChiste() {
     })
         .catch((error) => console.log(error));
 }
+//Botón de siguiente chiste:
 const button = document.getElementById("siguienteChiste");
 button.addEventListener("click", showRandomJoke);
+button.addEventListener("click", muestraBotones);
+button.addEventListener("click", limpiaReportAcudits);
+//Funcion que muestra los 3 botones al pulsar "Siguiente chiste"
+function muestraBotones() {
+    let uno = document.getElementById("uno");
+    uno.classList.remove("ocultar");
+    let dos = document.getElementById("dos");
+    dos.classList.remove("ocultar");
+    let tres = document.getElementById("tres");
+    tres.classList.remove("ocultar");
+}
+//Funcion que elimina chistes duplicados que tienen más de una puntuacion, primero comprueba si el chiste está en el array reportAccudits, si no está lo añade a reportAccudistClean, y si está lo sustituye
+function limpiaReportAcudits() {
+    var _a;
+    for (let i = 0; i < reportAcudits.length; i++) {
+        const index = reportAcudits.findIndex((chiste) => chiste.joke === reportAcudits[i].joke);
+        if (index == -1) {
+            reportAcuditsClean.push({
+                joke: (_a = document.getElementById("chiste")) === null || _a === void 0 ? void 0 : _a.innerHTML,
+                score: reportAcudits.score,
+                date: dateToday,
+            });
+        }
+        else {
+            reportAcuditsClean[index] = reportAcudits[i];
+        }
+    }
+    console.log(reportAcuditsClean);
+}
 const mostrarData = (response) => {
     //console.log(response);
     document.getElementById("chiste").innerHTML = response.joke; //El simbolo ! de exclamacion es el " non-null Assertion Operator" que nos fuerza a que el valor no sea null o undefined, si no lo ponemos da ERROR"
-    //Deberia mostrar los botones de puntuacion 1-2-3 pero no funciona ya que se muestran desde el principio:
-    document.getElementById("botones").classList.remove("ocultar");
 };
 //Funcion que carga Chuck Norris Jokes ahora por async/await:
 function chuckJoke() {
@@ -59,7 +89,6 @@ function showRandomJoke() {
 //Puntuacion de los chistes:
 const d = new Date();
 let dateToday = d.toISOString();
-const reportAcudits = [];
 const uno = document.getElementById("uno");
 uno.addEventListener("click", () => {
     var _a;
@@ -68,7 +97,7 @@ uno.addEventListener("click", () => {
         score: 1,
         date: dateToday,
     });
-    console.log(reportAcudits);
+    //console.log(reportAcudits);
 });
 const dos = document.getElementById("dos");
 dos.addEventListener("click", () => {
@@ -78,7 +107,7 @@ dos.addEventListener("click", () => {
         score: 2,
         date: dateToday,
     });
-    console.log(reportAcudits);
+    //console.log(reportAcudits);
 });
 const tres = document.getElementById("tres");
 tres.addEventListener("click", () => {
@@ -88,5 +117,21 @@ tres.addEventListener("click", () => {
         score: 3,
         date: dateToday,
     });
-    console.log(reportAcudits);
+    //console.log(reportAcudits);
 });
+//Mostrar informacion del clima:
+const appKey = "7abf35113b8a7dc94c53a73fbe5814a0";
+let lat = 41.3828939;
+let lon = 2.1774322;
+const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${appKey}`;
+let city = "Barcelona";
+let countryCode = "ES";
+const url2 = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${countryCode}&appid=${appKey}`;
+const mostrarCiudad = () => __awaiter(void 0, void 0, void 0, function* () {
+    const res = yield fetch(url2);
+    const data2 = yield res.json();
+    const [{ name }] = data2;
+    document.getElementById("ciudad").innerHTML = name;
+});
+const clima = document.getElementById("botonClima");
+clima.addEventListener("click", mostrarCiudad());
