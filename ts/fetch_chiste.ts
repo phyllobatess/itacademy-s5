@@ -47,7 +47,6 @@ function muestraBotones() {
 
 //Funcion que elimina chistes duplicados que tienen más de una puntuacion, primero comprueba si el chiste está en el array reportAccudits, si no está lo añade a reportAccudistClean, y si está lo sustituye
 function limpiaReportAcudits() {
-    
   for (let i = 0; i < reportAcudits.length; i++) {
     const index = reportAcudits.findIndex(
       (chiste: any) => chiste.joke === reportAcudits[i].joke
@@ -135,8 +134,5 @@ const mostrarCiudad = async () => {
   document.getElementById("ciudad")!.innerHTML = name;
 };
 
-
 const clima: any = document.getElementById("botonClima")!;
 clima.addEventListener("click", mostrarCiudad());
-
-
